@@ -51,7 +51,7 @@ test.describe('Homepage Functionality', () => {
   });
 
 
-  test.only('Verify navigating Nested Frames page', async ({ homepage }) => {
+  test('Verify navigating Nested Frames page', async ({ homepage }) => {
     await homepage.verifyHomepageConfirmation();
     await homepage.verifyAlertFrameWindowsCardClick();
     await homepage.verifyFramesOptionClick();
