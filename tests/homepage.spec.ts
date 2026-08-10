@@ -54,7 +54,23 @@ test.describe('Homepage Functionality', () => {
   test('Verify navigating Nested Frames page', async ({ homepage }) => {
     await homepage.verifyHomepageConfirmation();
     await homepage.verifyAlertFrameWindowsCardClick();
-    await homepage.verifyFramesOptionClick();
+    await homepage.verifyNestedFramesOptionClick();
+  });
+
+
+  test('Verify the text on parent frame of Nested Frames page', async ({ homepage }) => {
+    await homepage.verifyHomepageConfirmation();
+    await homepage.verifyAlertFrameWindowsCardClick();
+    await homepage.verifyNestedFramesOptionClick();
+    await homepage.verifyParentFrameText();
+  });
+
+
+  test('Verify the text on Child frame of Nested Frames page', async ({ homepage }) => {
+    await homepage.verifyHomepageConfirmation();
+    await homepage.verifyAlertFrameWindowsCardClick();
+    await homepage.verifyNestedFramesOptionClick();
+    await homepage.verifyChildFrameText();
   });
 
 

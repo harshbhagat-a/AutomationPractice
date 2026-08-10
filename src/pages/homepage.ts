@@ -17,6 +17,11 @@ export class HomePage {
     secondFrame: any;
     nestedFrameOption: Locator;
     nestedFrameHeading: Locator;
+    parentFrame: any;
+    paragraphText: Locator;
+    sectionBody: Locator;
+    interactionsCard: Locator;
+    sortableOption: Locator;
 
 
     constructor(private page: Page) {
@@ -35,6 +40,11 @@ export class HomePage {
         this.secondFrame = this.page.frameLocator('#frame2');
         this.nestedFrameOption = this.page.getByRole('link',{ name: 'Nested Frames', exact: true });
         this.nestedFrameHeading = this.page.getByRole('heading',{name:'Nested Frames'});
+        this.parentFrame = this.page.frameLocator('#frame1');
+        this.paragraphText = this.page.locator('p');
+        this.sectionBody = this.page.locator('body');
+        this.interactionsCard = this.page.getByText('Interactions',{exact: true});
+        this.sortableOption = this.page.getByRole('link',{name: 'sortable', exact: true});
     }
 
 
@@ -88,5 +98,23 @@ export class HomePage {
         await expect(this.nestedFrameOption).toBeVisible();
         await this.nestedFrameOption.click();
         await expect(this.nestedFrameHeading).toBeVisible();
+    }
+
+
+    async verifyParentFrameText(){
+        await expect(this.parentFrame.locator(this.sectionBody)).toHaveText(testdata.parentFrameText);
+    }
+
+
+    async verifyChildFrameText(){
+        const childFrame = this.parentFrame.frameLocator(testdata.childIFrame);
+        await expect(childFrame.locator(this.paragraphText)).toHaveText(testdata.childFrameText);
+    }
+
+
+    async verifyInteractionsCardClick(){
+        await expect(this.interactionsCard).toBeVisible();
+        await this.interactionsCard.click();
+        await expect(this.sortableOption).toBeVisible();
     }
 }
