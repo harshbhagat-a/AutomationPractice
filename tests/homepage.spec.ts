@@ -74,4 +74,85 @@ test.describe('Homepage Functionality', () => {
   });
 
 
+
+  test('Verify Interactions button click on homepage', async ({ homepage }) => {
+    await homepage.verifyHomepageConfirmation();
+    await homepage.verifyInteractionsCardClick();
+  });
+
+
+
+  test('Verify Sortable page navigation', async ({ homepage }) => {
+    await homepage.verifyHomepageConfirmation();
+    await homepage.verifyInteractionsCardClick();
+    await homepage.verifySortablePageNavigation();
+  });
+
+
+
+  test('Verify Grid section navigation from Sortable page', async ({ homepage }) => {
+    await homepage.verifyHomepageConfirmation();
+    await homepage.verifyInteractionsCardClick();
+    await homepage.verifySortablePageNavigation();
+    await homepage.verifyGridSectionNavigate();
+  });
+
+
+  test('Verify element dragging on Grid section of Sortable page', async ({ homepage }) => {
+    await homepage.verifyHomepageConfirmation();
+    await homepage.verifyInteractionsCardClick();
+    await homepage.verifySortablePageNavigation();
+    await homepage.verifyGridSectionNavigate();
+    await homepage.verifyGridDragAndSort(homepage.gridOne, homepage.gridSix);
+  });
+
+
+  test('Verify Selectable page navigation', async ({ homepage }) => {
+    await homepage.verifyHomepageConfirmation();
+    await homepage.verifyInteractionsCardClick();
+    await homepage.verifySelectableNavigation();
+  });
+  
+
+
+  test('Verify selecting an element on List section of Selectable page', async ({ homepage }) => {
+    await homepage.verifyHomepageConfirmation();
+    await homepage.verifyInteractionsCardClick();
+    await homepage.verifySelectableNavigation();
+    await homepage.verifyListSelect();
+  });
+
+
+  test('Verify navigating Grid section of Selectable page', async ({ homepage }) => {
+    await homepage.verifyHomepageConfirmation();
+    await homepage.verifyInteractionsCardClick();
+    await homepage.verifySelectableNavigation();
+    await homepage.verifySelectableGridNavigate()
+  });
+
+
+  test('Verify selecting an element on Grid section of Selectable page', async ({ homepage }) => {
+    await homepage.verifyHomepageConfirmation();
+    await homepage.verifyInteractionsCardClick();
+    await homepage.verifySelectableNavigation();
+    await homepage.verifySelectableGridNavigate()
+    await homepage.verifyGridSelect();
+  });
+
+
+
+  test('Verify Resizable page navigation', async ({ homepage }) => {
+    await homepage.verifyHomepageConfirmation();
+    await homepage.verifyInteractionsCardClick();
+    await homepage.verifyResizableNavigation();
+  });
+
+
+  test('Verify resizing an element on Resizable page', async ({ homepage }) => {
+    await homepage.verifyHomepageConfirmation();
+    await homepage.verifyInteractionsCardClick();
+    await homepage.verifyResizableNavigation();
+    await homepage.verifyResizingElement();
+  });
+
 })
