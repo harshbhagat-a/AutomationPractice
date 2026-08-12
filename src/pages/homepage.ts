@@ -37,6 +37,33 @@ export class HomePage {
     resizableHandle: Locator;
     resizableOption: Locator;
     resizableHeading: Locator;
+    droppableOption: Locator;
+    droppableTitle: Locator;
+    acceptTabButton: Locator;
+    dropAcceptableElement: Locator;
+    droppableArea: Locator;
+    unacceptableElement: Locator;
+    widgetCard: Locator;
+    menuOption: Locator;
+    mainItem2: Locator;
+    subItem: Locator;
+    subSubList: Locator;
+    subSubItem1: Locator;
+    menuHeading: Locator;
+    sliderOption: Locator;
+    sliderHeading: Locator;
+    sliderElement: Locator;
+    sliderValueElement: Locator;
+    tooltipOption: Locator;
+    tooltipHeading: Locator;
+    hoverMeButton: Locator;
+    buttonHoverText: Locator;
+    hoverTextfield: Locator;
+    textfieldHoverText: Locator;
+    contraryLinkedText: Locator;
+    contraryHoverText: Locator;
+    numberHoverText: Locator;
+    numberHoverLinkedText: Locator;
 
 
     constructor(private page: Page) {
@@ -75,6 +102,33 @@ export class HomePage {
         this.resizableHandle = this.resizable.locator('.react-resizable-handle-se');
         this.resizableOption = this.page.getByRole('link', { name: 'Resizable' });
         this.resizableHeading = this.page.getByRole('heading',{name: 'Resizable'});
+        this.droppableOption = this.page.getByRole('link',{name: 'Droppable'});
+        this.droppableTitle = this.page.getByRole('heading',{name: 'Droppable'});
+        this.acceptTabButton = this.page.getByRole('tab',{name: 'Accept'});
+        this.dropAcceptableElement = this.page.locator('#acceptable');
+        this.droppableArea = this.page.locator('.accept-drop-container .drop-box');
+        this.unacceptableElement = this.page.locator('.accept-drop-container .drag-box').last();
+        this.widgetCard = this.page.getByRole('heading',{name: 'Widgets'});
+        this.menuOption = this.page.getByRole('link', { name: 'Menu', exact: true });
+        this.menuHeading = this.page.getByRole('heading',{name: 'Menu'});
+        this.mainItem2 = page.getByText('Main Item 2', { exact: true });
+        this.subItem = page.getByText('Sub Item', { exact: true }).first();
+        this.subSubList = page.getByText('SUB SUB LIST »', { exact: true });
+        this.subSubItem1 = page.getByText('Sub Sub Item 1', { exact: true });
+        this.sliderOption = this.page.getByRole('link',{name: 'Slider'});
+        this.sliderHeading = this.page.getByRole('heading',{name: 'Slider'});
+        this.sliderElement = this.page.locator('.range-slider');
+        this.sliderValueElement = this.page.locator('#sliderValue');
+        this.tooltipOption = this.page.getByRole('link',{name: 'Tool Tips'});
+        this.tooltipHeading = this.page.getByRole('heading',{name: 'Tool Tips'});
+        this.hoverMeButton = this.page.getByRole('button',{name: 'Hover me to see'});
+        this.buttonHoverText = this.page.getByText('You hovered over the Button');
+        this.hoverTextfield = this.page.locator('#toolTipTextField');
+        this.textfieldHoverText = this.page.getByText('You hovered over the text field');
+        this.contraryLinkedText = this.page.getByRole('link',{name: 'Contrary'});
+        this.contraryHoverText = this.page.getByText('You hovered over the Contrary');
+        this.numberHoverLinkedText = this.page.getByRole('link',{name:'1.10.32'});
+        this.numberHoverText = this.page.getByText('You hovered over the 1.10.32');
     }
 
 
@@ -250,6 +304,117 @@ export class HomePage {
         const sizeAfter = await this.resizable.boundingBox();
         expect(sizeAfter!.width).toBeGreaterThan(sizeBefore!.width);
         expect(sizeAfter!.height).toBeGreaterThan(sizeBefore!.height);
+    }
+
+    async verifyDroppableNavigation(){
+        await expect(this.droppableOption).toBeVisible();
+        await this.droppableOption.click();
+        await expect(this.droppableTitle).toBeVisible();
+    }
+
+
+    async verifyAcceptTabNavigation(){
+        await expect(this.acceptTabButton).toBeVisible();
+        await this.acceptTabButton.click();
+        await expect(this.dropAcceptableElement).toBeVisible();
+    }
+
+
+    async verifyDraggingDroppableElement(){
+        await expect(this.dropAcceptableElement).toBeVisible();
+        await expect(this.droppableArea).toBeVisible();
+        await this.dropAcceptableElement.dragTo(this.droppableArea);
+        await expect(this.droppableArea).toHaveText('Dropped!');
+    }
+
+
+    async verifyUnacceptedElementDropping(){
+        await expect(this.unacceptableElement).toBeVisible();
+        await expect(this.droppableArea).toBeVisible();
+        await this.unacceptableElement.dragTo(this.droppableArea);
+        await expect(this.droppableArea).toHaveText('Drop here');
+    }
+
+
+    async verifyWidgetCardClick() {
+        await expect(this.widgetCard).toBeVisible();
+        await this.widgetCard.click();
+        await expect(this.menuOption).toBeVisible();
+    }
+
+
+    async verifyMenuPageNavigation(){
+        await expect(this.menuOption).toBeVisible();
+        await this.menuOption.click();
+        await expect(this.menuHeading).toBeVisible();
+    }
+
+    async verifyHoveringMenu(){
+        await this.mainItem2.hover();
+        await expect(this.subItem).toBeVisible();
+    }
+
+
+    async verifyHoveringSubmenu(){
+        await this.subSubList.hover();
+        await expect(this.subSubItem1).toBeVisible();
+    }
+
+
+    async verifySliderPageNavigate(){
+        await expect(this.sliderOption).toBeVisible();
+        await this.sliderOption.click();
+        await expect(this.sliderHeading).toBeVisible();
+    }
+
+
+    async verifySliderFunctionality(){
+        await expect(this.sliderElement).toBeVisible();
+        await this.sliderElement.fill('50')
+        await expect(this.sliderElement).toHaveValue('50');
+    }
+
+
+    async verifySliderUsingValue(){
+        await expect(this.sliderElement).toBeVisible();
+        await this.sliderElement.fill('50')
+        await expect(this.sliderValueElement).toHaveValue('50');
+    }
+
+
+    async verifyTooltipPageNavigation(){
+        await expect(this.tooltipOption).toBeVisible();
+        await this.tooltipOption.click();
+        await expect(this.tooltipHeading).toBeVisible();
+    }
+
+
+    async verifyHoverMeButtonFunctionality(){
+        await expect(this.hoverMeButton).toBeVisible();
+        await this.hoverMeButton.hover();
+        await expect(this.buttonHoverText).toBeVisible();
+    }
+
+
+    async verifyHoverMeTextfieldFunctionality(){
+        await expect(this.hoverTextfield).toBeVisible();
+        await this.hoverTextfield.hover();
+        await expect(this.textfieldHoverText).toBeVisible();
+    }
+
+
+    async verifyContraryLinkedTextHover(){
+        await expect(this.contraryLinkedText).toBeVisible();
+        await this.contraryLinkedText.hover();
+        await expect(this.contraryHoverText).toBeVisible();
+    }
+
+
+
+    async verifyNumberLinkedTextHover(){
+        await expect(this.numberHoverLinkedText).toBeVisible();
+        await this.numberHoverLinkedText.hover();
+        await expect(this.numberHoverText).toBeVisible();
     }
 
 }
