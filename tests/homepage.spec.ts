@@ -1,6 +1,6 @@
 import { test, expect } from '../src/fixture';
 
-test.describe('Homepage Functionality', () => {
+test.describe('Home Page', () => {
 
   test('Verify homepage navigation', async ({ homepage }) => {
     await homepage.verifyHomepageConfirmation();
@@ -285,5 +285,52 @@ test.describe('Homepage Functionality', () => {
     await homepage.verifyTooltipPageNavigation();
     await homepage.verifyNumberLinkedTextHover();
   });
+
+
+  test('Verify Elements section button click on homepage', async ({ homepage }) => {
+    await homepage.verifyHomepageConfirmation();
+    await homepage.verifyElementsPageNavigate();
+  });
+
+
+
+  test('Verify navigating Dynamic Properties on Elements page', async ({ homepage }) => {
+    await homepage.verifyHomepageConfirmation();
+    await homepage.verifyElementsPageNavigate();
+    await homepage.verifyDynamicPropertiesNavigate();
+  });
+
+
+
+  test('Verify Button 1 enabled after 5 section on Dynamic Properties page', async ({ homepage }) => {
+    await homepage.verifyHomepageConfirmation();
+    await homepage.verifyElementsPageNavigate();
+    await homepage.verifyDynamicPropertiesNavigate();
+    await homepage.verifyButtonEnabled();
+  });
+
+
+
+  test('Verify Button 2 text color after 5 section on Dynamic Properties page', async ({ homepage }) => {
+    await homepage.verifyHomepageConfirmation();
+    await homepage.verifyElementsPageNavigate();
+    await homepage.verifyDynamicPropertiesNavigate();
+    await homepage.verifyButtonTextColorChange();
+  });
+
+
+
+  test('Verify Button 3 visibility after 5 section on Dynamic Properties page', async ({ homepage }) => {
+    await homepage.verifyHomepageConfirmation();
+    await homepage.verifyElementsPageNavigate();
+    await homepage.verifyDynamicPropertiesNavigate();
+    await homepage.verifyButtonVisibility();
+  });
+
+
+
+
+
+
 
 })

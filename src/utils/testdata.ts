@@ -8,4 +8,16 @@ export const testdata = {
     childIFrame: 'iframe',
 
     interactionPageText: 'Please select an item from left to start practice.',
+
+    firstName: 'Test',
+
+    lastName: 'QA',
+
+    email: 'test123@abc.com',
+
+    age: '24',
+
+    salary: '25000',
+
+    department: 'Testing',
 };

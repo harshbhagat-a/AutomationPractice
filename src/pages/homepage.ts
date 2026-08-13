@@ -64,6 +64,14 @@ export class HomePage {
     contraryHoverText: Locator;
     numberHoverText: Locator;
     numberHoverLinkedText: Locator;
+    elementsCard: Locator;
+    dynamicPropertiesOption: Locator;
+    dynamicPropertiesHeading: Locator;
+    dynamicButton1: Locator;
+    dynamicButton2: Locator;
+    dynamicButton3: Locator;
+    webTablesOption: Locator;
+    webTablesHeading: Locator;
 
 
     constructor(private page: Page) {
@@ -129,6 +137,14 @@ export class HomePage {
         this.contraryHoverText = this.page.getByText('You hovered over the Contrary');
         this.numberHoverLinkedText = this.page.getByRole('link',{name:'1.10.32'});
         this.numberHoverText = this.page.getByText('You hovered over the 1.10.32');
+        this.elementsCard = this.page.getByRole('heading',{name: 'Elements'});
+        this.dynamicPropertiesOption = this.page.getByRole('link',{name: 'Dynamic Properties'});
+        this.dynamicPropertiesHeading = this.page.getByRole('heading',{name: 'Dynamic Properties'});
+        this.dynamicButton1 = this.page.locator('#enableAfter');
+        this.dynamicButton2 = this.page.locator('#colorChange');
+        this.dynamicButton3 = this.page.locator('#visibleAfter');
+        this.webTablesOption = this.page.getByRole('link',{name: 'Web Tables'});
+        this.webTablesHeading = this.page.getByRole('heading',{name: 'Web Tables'});
     }
 
 
@@ -415,6 +431,40 @@ export class HomePage {
         await expect(this.numberHoverLinkedText).toBeVisible();
         await this.numberHoverLinkedText.hover();
         await expect(this.numberHoverText).toBeVisible();
+    }
+
+
+    async verifyElementsPageNavigate(){
+        await expect(this.elementsCard).toBeVisible();
+        await this.elementsCard.click();
+        await expect(this.dynamicPropertiesOption).toBeVisible();
+    }
+
+
+    async verifyDynamicPropertiesNavigate(){
+        await expect(this.dynamicPropertiesOption).toBeVisible();
+        await this.dynamicPropertiesOption.click();
+        await expect(this.dynamicPropertiesHeading).toBeVisible();
+    }
+
+
+    async verifyButtonEnabled(){
+        await expect(this.dynamicButton1).toBeVisible();
+        await expect(this.dynamicButton1).toBeDisabled();
+        await this.page.waitForTimeout(5000);
+        await expect(this.dynamicButton1).toBeEnabled();
+    }
+
+    async verifyButtonTextColorChange(){
+        await expect(this.dynamicButton2).toBeVisible();
+        await this.page.waitForTimeout(5000);
+        await expect(this.dynamicButton2).toHaveClass(/text-danger/);
+    }
+
+
+    async verifyButtonVisibility(){
+        await this.page.waitForTimeout(5000);
+        await expect(this.dynamicButton3).toBeVisible();
     }
 
 }
