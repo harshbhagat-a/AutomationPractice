@@ -22,6 +22,10 @@ export class WebTablesPage {
     ageColumn: Locator;
     emailColumn: Locator;
     salaryColumn: Locator;
+    departmentColumn: Locator;
+    editIcon: Locator;
+    searchBox: Locator;
+
 
 
     constructor(private page: Page) {
@@ -45,6 +49,9 @@ export class WebTablesPage {
         this.ageColumn = this.page.locator('td').nth(2);
         this.emailColumn = this.page.locator('td').nth(3);
         this.salaryColumn = this.page.locator('td').nth(4);
+        this.departmentColumn = this.page.locator('td').nth(5);
+        this.editIcon = this.page.locator('[title="Edit"]');
+        this.searchBox = this.page.locator('#searchBox');
     }
 
 
@@ -98,6 +105,27 @@ export class WebTablesPage {
     async verifyColumnData(column: Locator, data: string ){
         await expect(this.lastColumn).toBeVisible();
         await expect(this.lastColumn.locator(column)).toHaveText(data);
+    }
+
+
+    async verifyEditIconClick(){
+        const lastEdit = this.lastColumn.locator(this.editIcon);
+        await expect(lastEdit).toBeVisible();
+        await lastEdit.click();
+        await expect(this.registrationFormHeading).toBeVisible();
+    }
+
+    async verifyCrossIconClick(){
+        await expect(this.crossButton).toBeVisible();
+        await this.crossButton.click();
+        await expect(this.webTablesHeading).toBeVisible();
+    }
+
+
+    async verifySearchField(){
+        await expect(this.searchBox).toBeVisible();
+        await this.searchBox.fill(testdata.firstName);
+        
     }
 
 }
