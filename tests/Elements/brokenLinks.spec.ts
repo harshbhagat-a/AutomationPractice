@@ -10,8 +10,21 @@ test.describe('Broken Links - Images Page', () => {
   });
 
 
-  test('Verify Add button functionality on Web Tables page', async ({ brokenLinks }) => {
+  test('Verify elements visible on Broken Links and Images page', async ({ brokenLinks }) => {
     await brokenLinks.verifyBrokenLinksElements();
+  });
+
+
+
+  test('Verify functionality of Valid Link on Broken Links and Images page', async ({ brokenLinks, homepage }) => {
+    await brokenLinks.verifyValidLinkClick();
+    await expect(homepage.adBanner).toBeVisible();
+  });
+
+
+
+  test('Verify functionality of Broken Link on Broken Links and Images page', async ({ brokenLinks }) => {
+    await brokenLinks.verifyBrokenLinkClick();
   });
 
 

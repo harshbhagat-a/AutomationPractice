@@ -1,5 +1,6 @@
 import { Locator, Page, expect } from '@playwright/test';
 import { testdata } from '../../utils/testdata';
+import { HomePage } from '../homepage';
 
 export class BrokenLinksPage {
     BrokenLinkImagesLinkText: Locator;
@@ -9,6 +10,9 @@ export class BrokenLinksPage {
     brokenImageText: Locator;
     validLinkText: Locator;
     brokenLinkText: Locator;
+    validLink: Locator;
+    brokenLink: Locator;
+    brokenPageTitle: Locator;
 
 
     constructor(private page: Page) {
@@ -20,6 +24,9 @@ export class BrokenLinksPage {
         this.brokenImageText = this.page.getByText('Broken image',{exact: true});
         this.validLinkText = this.page.getByText('Valid Link',{exact: true});
         this.brokenLinkText = this.page.getByText('Broken Link',{exact: true});
+        this.validLink = this.page.getByText('Click Here for Valid Link',{exact: true});
+        this.brokenLink = this.page.getByText('Click Here for Broken Link',{exact: true});
+        this.brokenPageTitle = this.page.getByRole('heading',{name: 'Status Codes'});
     }
 
 
@@ -41,6 +48,20 @@ export class BrokenLinksPage {
     }
 
 
+    async verifyValidLinkClick(){
+        await expect(this.validLink).toBeVisible();
+        await this.validLink.click();
+        await this.page.waitForLoadState('domcontentloaded');
+    }
+
+
+
+    async verifyBrokenLinkClick(){
+        await expect(this.brokenLink).toBeVisible();
+        await this.brokenLink.click();
+        await this.page.waitForLoadState('domcontentloaded');
+        await expect(this.brokenPageTitle).toBeVisible();
+    }
 
 
 

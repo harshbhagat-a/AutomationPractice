@@ -20,4 +20,7 @@ export const testdata = {
     salary: '25000',
 
     department: 'Testing',
+
+    phoneNo: '9876543210',
+    
 };
