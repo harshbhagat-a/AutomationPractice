@@ -1,3 +1,4 @@
+import { fromSync } from 'node:stream/iter';
 import { test, expect } from '../../src/fixture';
 import { testdata } from '../../src/utils/testdata';
 
@@ -54,6 +55,42 @@ test.describe('Forms Page', () => {
 
   test('Verify Mobile input field fill on Practice Forms page', async ({ forms }) => {
     await forms.verifyInputFieldFill(forms.mobileInputField, testdata.phoneNo);
+  });
+
+
+
+  test('Verify Date of Birth field click on Practice Forms page', async ({ forms }) => {
+    await forms.verifyDOBClick();
+  });
+
+
+
+  test('Verify Year selection on DOB calender widget', async ({ forms }) => {
+    await forms.verifyDOBClick();
+    await forms.verifyYearSelection();
+  });
+
+
+  test('Verify Month selection on DOB calender widget', async ({ forms }) => {
+    await forms.verifyDOBClick();
+    await forms.verifyMonthSelection();
+  });
+
+
+
+  test('Verify Date selection on DOB calender widget', async ({ forms }) => {
+    await forms.verifyDOBClick();
+    await forms.verifyDateSelection();
+    await expect(forms.dateOfBirthField).toHaveValue(new RegExp(`^${testdata.date}\\s`));
+  });
+
+
+  test('Verify Full selected date on DOB calender widget', async ({ forms }) => {
+    await forms.verifyDOBClick();
+    await forms.verifyYearSelection();
+    await forms.verifyMonthSelection();
+    await forms.verifyDateSelection();
+    await forms.verifyFullSelectedDate();
   });
 
 

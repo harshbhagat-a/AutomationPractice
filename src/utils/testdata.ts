@@ -22,5 +22,10 @@ export const testdata = {
     department: 'Testing',
 
     phoneNo: '9876543210',
-    
+
+    year: '2000',
+
+    month: 'May',
+
+    date: '15',
 };

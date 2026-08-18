@@ -1,4 +1,5 @@
 import { Locator, Page, expect } from '@playwright/test';
+import { testdata } from '../../utils/testdata';
 
 export class FormsPage {
     formsCard: Locator;
@@ -11,7 +12,7 @@ export class FormsPage {
     femaleRadioButton: Locator;
     otherRadioButton: Locator;
     mobileInputField: Locator;
-    dateOfBirthFIeld: Locator;
+    dateOfBirthField: Locator;
     subjectField: Locator;
     sportsCheckbox: Locator;
     readingCheckbox: Locator;
@@ -21,6 +22,11 @@ export class FormsPage {
     selectStateDropdown: Locator;
     selectCityDropdown: Locator;
     submitButton: Locator;
+    calenderWidget: Locator;
+    yearDropdown: Locator;
+    monthDropdown: Locator;
+    monthYearHeading: Locator;
+    dateTable: Locator;
 
     
     constructor(private page: Page) {
@@ -35,7 +41,7 @@ export class FormsPage {
         this.femaleRadioButton = this.page.getByText('Female',{exact: true});
         this.otherRadioButton = this.page.getByText('Other',{exact: true});
         this.mobileInputField = this.page.locator('#userNumber');
-        this.dateOfBirthFIeld = this.page.locator('#dateOfBirthInput');
+        this.dateOfBirthField = this.page.locator('#dateOfBirthInput');
         this.subjectField = this.page.locator('#subjectsInput');
         this.sportsCheckbox = this.page.getByText('Sports',{exact: true});
         this.readingCheckbox = this.page.getByText('Reading',{exact: true});
@@ -45,6 +51,12 @@ export class FormsPage {
         this.selectStateDropdown = this.page.getByText('Select State',{exact: true});
         this.selectCityDropdown = this.page.locator('#city');
         this.submitButton = this.page.getByRole('button',{name: 'Submit'});
+        this.calenderWidget = this.page.locator('.react-datepicker');
+        this.yearDropdown = this.page.locator('.react-datepicker__year-select');
+        this.monthDropdown = this.page.locator('.react-datepicker__month-select');
+        this.monthYearHeading = this.page.locator('.react-datepicker__current-month');
+        this.dateTable  = this.page.getByRole('table');
+
         
     }
 
@@ -64,7 +76,7 @@ export class FormsPage {
     async verifyPracticeFormPageElements(){
         const locators: Locator[] = [
             this.firstNameField, this.lastNameField, this.emailField, this.maleRadioButton, this.femaleRadioButton,
-            this.otherRadioButton, this.mobileInputField, this.dateOfBirthFIeld, this.subjectField, this.sportsCheckbox,
+            this.otherRadioButton, this.mobileInputField, this.dateOfBirthField, this.subjectField, this.sportsCheckbox,
             this.readingCheckbox, this.musicCheckbox, this.pictureField, this.currentAddressField, this.selectStateDropdown,
             this.selectCityDropdown, this.submitButton
         ];
@@ -85,6 +97,40 @@ export class FormsPage {
         await expect(element).toBeVisible();
         await element.click();
         await expect(element).toBeChecked();
+    }
+
+
+    async verifyDOBClick(){
+        await expect(this.dateOfBirthField).toBeVisible();
+        await this.dateOfBirthField.click();
+        await expect(this.calenderWidget).toBeVisible();
+    }
+
+
+    async verifyYearSelection(){
+        await expect(this.yearDropdown).toBeVisible();
+        await this.yearDropdown.selectOption(testdata.year);
+        await expect(this.yearDropdown).toHaveValue(testdata.year);
+    }
+
+
+
+    async verifyMonthSelection(){
+        await expect(this.monthDropdown).toBeVisible();
+        await this.monthDropdown.selectOption(testdata.month);
+        await expect(this.monthYearHeading).toContainText(testdata.month);
+    }
+
+
+    async verifyDateSelection(){
+        const SelectedDate = this.dateTable.getByText(testdata.date);
+        await expect(SelectedDate).toBeVisible();
+        await SelectedDate.click();
+    }
+
+    async verifyFullSelectedDate(){
+        const expectedDate = `${testdata.date} ${testdata.month} ${testdata.year}`;
+        await expect(this.dateOfBirthField).toHaveValue(expectedDate);
     }
 
 

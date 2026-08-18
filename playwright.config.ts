@@ -16,7 +16,7 @@ export default defineConfig({
   use: {
     baseURL: process.env.BASE_URL || 'https://demoqa.com',
     headless: true,
-    trace: 'on-first-retry',
+    trace: 'on',
   },
   /* Configure projects for major browsers */
   projects: [
