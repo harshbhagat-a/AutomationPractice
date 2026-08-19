@@ -1,6 +1,4 @@
 import { Locator, Page, expect } from '@playwright/test';
-import { testdata } from '../../utils/testdata';
-import { HomePage } from '../homepage';
 
 export class BrokenLinksPage {
     BrokenLinkImagesLinkText: Locator;

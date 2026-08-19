@@ -167,30 +167,11 @@ export class HomePage {
     }
 
 
-    async verifyPromptAlertTextFill() {
-        await expect(this.promptAlertButton).toBeVisible();
-        this.page.on('dialog', async dialog => {
-            await dialog.accept('test');
-        });
-        await this.promptAlertButton.click();
-    }
-
 
     async verifyFramesOptionClick() {
         await expect(this.frameOption).toBeVisible();
         await this.frameOption.click();
         await expect(this.framesHeading).toBeVisible();
-    }
-
-    async verifyFirstFrameText() {
-        await expect(this.framesHeading).toBeVisible();
-        await expect(this.firstFrame.locator(this.framesTitle)).toHaveText(testdata.frame1text);
-    }
-
-
-    async verifySecondFrameText() {
-        await expect(this.framesHeading).toBeVisible();
-        await expect(this.secondFrame.locator(this.framesTitle)).toHaveText(testdata.frame1text);
     }
 
 
@@ -201,52 +182,17 @@ export class HomePage {
     }
 
 
-    async verifyParentFrameText() {
-        await expect(this.parentFrame.locator(this.sectionBody)).toHaveText(testdata.parentFrameText);
-    }
-
-
-    async verifyChildFrameText() {
-        const childFrame = this.parentFrame.frameLocator(testdata.childIFrame);
-        await expect(childFrame.locator(this.paragraphText)).toHaveText(testdata.childFrameText);
-    }
-
-
     async verifyInteractionsCardClick() {
         await expect(this.interactionsCard).toBeVisible();
         await this.interactionsCard.click();
         await expect(this.sortableOption).toBeVisible();
     }
 
-    async verifySortablePageNavigation() {
-        await expect(this.sortableOption).toBeVisible();
-        await this.sortableOption.click();
-        await expect(this.gridButton).toBeVisible();
-    }
-
-    async verifyGridSectionNavigate() {
-        await expect(this.gridButton).toBeVisible();
-        await this.gridButton.click();
-        await expect(this.gridOne).toBeVisible();
-    }
 
 
     async verifyDraggingElement() {
         await expect(this.gridOne).toBeVisible();
         await this.gridOne.dragTo(this.gridSix);
-    }
-
-
-    async verifyGridDragAndSort(source: Locator, target: Locator) {
-        const itemsBefore = await this.gridItems.allTextContents();
-        const sourceText = (await source.textContent())?.trim();
-        const targetText = (await target.textContent())?.trim();
-        expect(sourceText).toBeTruthy();
-        expect(targetText).toBeTruthy();
-        const targetIndex = itemsBefore.indexOf(targetText!);
-        await source.dragTo(target);
-        const itemsAfter = await this.gridItems.allTextContents();
-        expect(itemsAfter[targetIndex]).toBe(sourceText);
     }
 
 
@@ -267,89 +213,7 @@ export class HomePage {
     }
 
 
-    async verifySelectableNavigation(){
-        await expect(this.selectableOption).toBeVisible();
-        await this.selectableOption.click();
-        await expect(this.gridButton).toBeVisible();
-    }
 
-
-    async verifyListSelect(){
-        await expect(this.firstSelectable).toBeVisible();
-        await this.firstSelectable.click();
-        await expect(this.firstSelectable).toHaveClass(/active/);
-    }
-
-
-    async verifyGridSelect(){
-        await expect(this.firstGridSelectable).toBeVisible();
-        await this.firstGridSelectable.click();
-        await expect(this.firstGridSelectable).toHaveClass(/active/);
-    }
-
-
-    async verifySelectableGridNavigate() {
-        await expect(this.gridButton).toBeVisible();
-        await this.gridButton.click();
-        await expect(this.firstGridSelectable).toBeVisible();
-    }
-
-
-    async verifyResizableNavigation(){
-        await expect(this.resizableOption).toBeVisible();
-        await this.resizableOption.click();
-        await expect(this.resizableHeading).toBeVisible();
-    }
-
-
-    async verifyResizingElement() {
-        await expect(this.resizable).toBeVisible();
-        const sizeBefore = await this.resizable.boundingBox();
-        const handle = await this.resizableHandle.boundingBox();
-        await this.page.mouse.move(
-            handle!.x + handle!.width / 2,
-            handle!.y + handle!.height / 2
-        );
-        await this.page.mouse.down();
-        await this.page.mouse.move(
-            handle!.x + handle!.width / 2 + 100,
-            handle!.y + handle!.height / 2 + 50,
-            { steps: 10 }
-        );
-        await this.page.mouse.up();
-        const sizeAfter = await this.resizable.boundingBox();
-        expect(sizeAfter!.width).toBeGreaterThan(sizeBefore!.width);
-        expect(sizeAfter!.height).toBeGreaterThan(sizeBefore!.height);
-    }
-
-    async verifyDroppableNavigation(){
-        await expect(this.droppableOption).toBeVisible();
-        await this.droppableOption.click();
-        await expect(this.droppableTitle).toBeVisible();
-    }
-
-
-    async verifyAcceptTabNavigation(){
-        await expect(this.acceptTabButton).toBeVisible();
-        await this.acceptTabButton.click();
-        await expect(this.dropAcceptableElement).toBeVisible();
-    }
-
-
-    async verifyDraggingDroppableElement(){
-        await expect(this.dropAcceptableElement).toBeVisible();
-        await expect(this.droppableArea).toBeVisible();
-        await this.dropAcceptableElement.dragTo(this.droppableArea);
-        await expect(this.droppableArea).toHaveText('Dropped!');
-    }
-
-
-    async verifyUnacceptedElementDropping(){
-        await expect(this.unacceptableElement).toBeVisible();
-        await expect(this.droppableArea).toBeVisible();
-        await this.unacceptableElement.dragTo(this.droppableArea);
-        await expect(this.droppableArea).toHaveText('Drop here');
-    }
 
 
     async verifyWidgetCardClick() {
@@ -358,39 +222,41 @@ export class HomePage {
         await expect(this.menuOption).toBeVisible();
     }
 
-
+    //duplicate
     async verifyMenuPageNavigation(){
         await expect(this.menuOption).toBeVisible();
         await this.menuOption.click();
         await expect(this.menuHeading).toBeVisible();
     }
 
+    //duplicate
     async verifyHoveringMenu(){
         await this.mainItem2.hover();
         await expect(this.subItem).toBeVisible();
     }
 
-
+    //duplicate
     async verifyHoveringSubmenu(){
         await this.subSubList.hover();
+        await this.page.waitForTimeout(1000);
         await expect(this.subSubItem1).toBeVisible();
     }
 
-
+    //duplicate
     async verifySliderPageNavigate(){
         await expect(this.sliderOption).toBeVisible();
         await this.sliderOption.click();
         await expect(this.sliderHeading).toBeVisible();
     }
 
-
+    //duplicate
     async verifySliderFunctionality(){
         await expect(this.sliderElement).toBeVisible();
         await this.sliderElement.fill('50')
         await expect(this.sliderElement).toHaveValue('50');
     }
 
-
+    //duplicate
     async verifySliderUsingValue(){
         await expect(this.sliderElement).toBeVisible();
         await this.sliderElement.fill('50')
@@ -398,38 +264,41 @@ export class HomePage {
     }
 
 
+    //duplicate
     async verifyTooltipPageNavigation(){
         await expect(this.tooltipOption).toBeVisible();
         await this.tooltipOption.click();
         await expect(this.tooltipHeading).toBeVisible();
     }
 
-
+    //duplicate
     async verifyHoverMeButtonFunctionality(){
         await expect(this.hoverMeButton).toBeVisible();
         await this.hoverMeButton.hover();
         await expect(this.buttonHoverText).toBeVisible();
     }
 
-
+    //duplicate
     async verifyHoverMeTextfieldFunctionality(){
         await expect(this.hoverTextfield).toBeVisible();
         await this.hoverTextfield.hover();
         await expect(this.textfieldHoverText).toBeVisible();
     }
 
-
+    //duplicate
     async verifyContraryLinkedTextHover(){
         await expect(this.contraryLinkedText).toBeVisible();
         await this.contraryLinkedText.hover();
+        await this.page.waitForTimeout(1000);
         await expect(this.contraryHoverText).toBeVisible();
     }
 
 
-
+    //duplicate
     async verifyNumberLinkedTextHover(){
         await expect(this.numberHoverLinkedText).toBeVisible();
         await this.numberHoverLinkedText.hover();
+        await this.page.waitForTimeout(1000);
         await expect(this.numberHoverText).toBeVisible();
     }
 

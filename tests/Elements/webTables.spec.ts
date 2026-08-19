@@ -21,15 +21,15 @@ test.describe('Web Tables Page', () => {
   });
 
 
-  test('Verify functionality of First Name input field on Registration form', async ({ webTable }) => {
+  test('Verify functionality of First Name input field on Registration form', async ({ webTable, testData }) => {
     await webTable.verifyAddButtonClick();
-    await webTable.verifyFirstNameFill(webTable.firstNameWrapper, testdata.firstName);
+    await webTable.verifyFirstNameFill(webTable.firstNameWrapper, testData.firstName);
   });
 
 
-  test('Verify functionality of Last Name input field on Registration form', async ({ webTable }) => {
+  test('Verify functionality of Last Name input field on Registration form', async ({ webTable,testData }) => {
     await webTable.verifyAddButtonClick();
-    await webTable.verifyFirstNameFill(webTable.lastNameWrapper, testdata.lastName);
+    await webTable.verifyFirstNameFill(webTable.lastNameWrapper, testData.lastName);
   });
 
 

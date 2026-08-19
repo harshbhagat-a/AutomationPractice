@@ -1,4 +1,3 @@
-import { fromSync } from 'node:stream/iter';
 import { test, expect } from '../../src/fixture';
 import { testdata } from '../../src/utils/testdata';
 
@@ -91,7 +90,7 @@ test.describe('Forms Page', () => {
     await forms.verifyMonthSelection();
     await forms.verifyDateSelection();
     await forms.verifyFullSelectedDate();
-    
+
   });
 
 

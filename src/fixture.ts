@@ -3,12 +3,24 @@ import { HomePage } from './pages/homepage';
 import { WebTablesPage } from './pages/elements/webTablesPage';
 import { BrokenLinksPage } from './pages/elements/brokenLinksPage';
 import { FormsPage } from './pages/forms/formsPage';
+import { AlertsPage } from './pages/alert_frames_windows/alertsPage';
+import { FramesPage } from './pages/alert_frames_windows/framesPage';
+import { NestedFramesPage } from './pages/alert_frames_windows/nestedFramesPage';
+import { InteractionsPage } from './pages/interactionsPage';
+import { WidgetPage } from './pages/widgetPage';
+import { testdata } from './utils/testdata';
 
 type MyFixtures = {
     homepage: HomePage;
     webTable: WebTablesPage;
     brokenLinks: BrokenLinksPage;
     forms: FormsPage;
+    alerts: AlertsPage;
+    frames: FramesPage;
+    nestedFrame: NestedFramesPage;
+    interactions: InteractionsPage;
+    widget: WidgetPage;
+    testData: typeof testdata;
 };
 
 export const test = base.extend<MyFixtures>({
@@ -32,6 +44,41 @@ export const test = base.extend<MyFixtures>({
     forms: async({ page }, use) =>{
         const forms = new FormsPage(page);
         await use(forms);
+    },
+
+
+    alerts: async({ page }, use) =>{
+        const alerts = new AlertsPage(page);
+        await use(alerts);
+    },
+
+
+    frames: async({ page }, use) =>{
+        const frames = new FramesPage(page);
+        await use(frames);
+    },
+
+
+    nestedFrame: async({ page }, use) =>{
+        const nestedFrame = new NestedFramesPage(page);
+        await use(nestedFrame);
+    },
+
+
+    interactions: async({ page }, use) =>{
+        const interactions = new InteractionsPage(page);
+        await use(interactions);
+    },
+
+
+    widget: async({ page }, use) =>{
+        const widget = new WidgetPage(page);
+        await use(widget);
+    },
+
+
+    testData: async ({}, use) => {
+    await use(testdata);
     },
 
 
