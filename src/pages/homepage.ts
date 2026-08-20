@@ -72,6 +72,9 @@ export class HomePage {
     dynamicButton3: Locator;
     webTablesOption: Locator;
     webTablesHeading: Locator;
+    browserWindowsOption: Locator;
+    browserWindowsHeading: Locator;
+    newWindowButton: Locator;
 
 
     constructor(private page: Page) {
@@ -109,42 +112,48 @@ export class HomePage {
         this.resizable = this.page.locator('#resizable');
         this.resizableHandle = this.resizable.locator('.react-resizable-handle-se');
         this.resizableOption = this.page.getByRole('link', { name: 'Resizable' });
-        this.resizableHeading = this.page.getByRole('heading',{name: 'Resizable'});
-        this.droppableOption = this.page.getByRole('link',{name: 'Droppable'});
-        this.droppableTitle = this.page.getByRole('heading',{name: 'Droppable'});
-        this.acceptTabButton = this.page.getByRole('tab',{name: 'Accept'});
+        this.resizableHeading = this.page.getByRole('heading', { name: 'Resizable' });
+        this.droppableOption = this.page.getByRole('link', { name: 'Droppable' });
+        this.droppableTitle = this.page.getByRole('heading', { name: 'Droppable' });
+        this.acceptTabButton = this.page.getByRole('tab', { name: 'Accept' });
         this.dropAcceptableElement = this.page.locator('#acceptable');
         this.droppableArea = this.page.locator('.accept-drop-container .drop-box');
         this.unacceptableElement = this.page.locator('.accept-drop-container .drag-box').last();
-        this.widgetCard = this.page.getByRole('heading',{name: 'Widgets'});
+        this.widgetCard = this.page.getByRole('heading', { name: 'Widgets' });
         this.menuOption = this.page.getByRole('link', { name: 'Menu', exact: true });
-        this.menuHeading = this.page.getByRole('heading',{name: 'Menu'});
+        this.menuHeading = this.page.getByRole('heading', { name: 'Menu' });
         this.mainItem2 = page.getByText('Main Item 2', { exact: true });
         this.subItem = page.getByText('Sub Item', { exact: true }).first();
         this.subSubList = page.getByText('SUB SUB LIST »', { exact: true });
         this.subSubItem1 = page.getByText('Sub Sub Item 1', { exact: true });
-        this.sliderOption = this.page.getByRole('link',{name: 'Slider'});
-        this.sliderHeading = this.page.getByRole('heading',{name: 'Slider'});
+        this.sliderOption = this.page.getByRole('link', { name: 'Slider' });
+        this.sliderHeading = this.page.getByRole('heading', { name: 'Slider' });
         this.sliderElement = this.page.locator('.range-slider');
         this.sliderValueElement = this.page.locator('#sliderValue');
-        this.tooltipOption = this.page.getByRole('link',{name: 'Tool Tips'});
-        this.tooltipHeading = this.page.getByRole('heading',{name: 'Tool Tips'});
-        this.hoverMeButton = this.page.getByRole('button',{name: 'Hover me to see'});
+        this.tooltipOption = this.page.getByRole('link', { name: 'Tool Tips' });
+        this.tooltipHeading = this.page.getByRole('heading', { name: 'Tool Tips' });
+        this.hoverMeButton = this.page.getByRole('button', { name: 'Hover me to see' });
         this.buttonHoverText = this.page.getByText('You hovered over the Button');
         this.hoverTextfield = this.page.locator('#toolTipTextField');
         this.textfieldHoverText = this.page.getByText('You hovered over the text field');
-        this.contraryLinkedText = this.page.getByRole('link',{name: 'Contrary'});
+        this.contraryLinkedText = this.page.getByRole('link', { name: 'Contrary' });
         this.contraryHoverText = this.page.getByText('You hovered over the Contrary');
-        this.numberHoverLinkedText = this.page.getByRole('link',{name:'1.10.32'});
+        this.numberHoverLinkedText = this.page.getByRole('link', { name: '1.10.32' });
         this.numberHoverText = this.page.getByText('You hovered over the 1.10.32');
-        this.elementsCard = this.page.getByRole('heading',{name: 'Elements'});
-        this.dynamicPropertiesOption = this.page.getByRole('link',{name: 'Dynamic Properties'});
-        this.dynamicPropertiesHeading = this.page.getByRole('heading',{name: 'Dynamic Properties'});
+        this.elementsCard = this.page.getByRole('heading', { name: 'Elements' });
+        this.dynamicPropertiesOption = this.page.getByRole('link', { name: 'Dynamic Properties' });
+        this.dynamicPropertiesHeading = this.page.getByRole('heading', { name: 'Dynamic Properties' });
         this.dynamicButton1 = this.page.locator('#enableAfter');
         this.dynamicButton2 = this.page.locator('#colorChange');
         this.dynamicButton3 = this.page.locator('#visibleAfter');
-        this.webTablesOption = this.page.getByRole('link',{name: 'Web Tables'});
-        this.webTablesHeading = this.page.getByRole('heading',{name: 'Web Tables'});
+        this.webTablesOption = this.page.getByRole('link', { name: 'Web Tables' });
+        this.webTablesHeading = this.page.getByRole('heading', { name: 'Web Tables' });
+
+        //Browser windows page
+        this.browserWindowsOption = this.page.getByRole('link', { name: 'Browser Windows' });
+        this.browserWindowsHeading = this.page.getByRole('heading', { name: 'Browser Windows' });
+        this.newWindowButton = this.page.getByRole('button', { name: 'New Window', exact: true});
+
     }
 
 
@@ -213,108 +222,42 @@ export class HomePage {
     }
 
 
-
-
-
     async verifyWidgetCardClick() {
         await expect(this.widgetCard).toBeVisible();
         await this.widgetCard.click();
         await expect(this.menuOption).toBeVisible();
     }
 
-    //duplicate
-    async verifyMenuPageNavigation(){
-        await expect(this.menuOption).toBeVisible();
-        await this.menuOption.click();
-        await expect(this.menuHeading).toBeVisible();
-    }
 
-    //duplicate
-    async verifyHoveringMenu(){
-        await this.mainItem2.hover();
-        await expect(this.subItem).toBeVisible();
-    }
-
-    //duplicate
-    async verifyHoveringSubmenu(){
-        await this.subSubList.hover();
-        await this.page.waitForTimeout(1000);
-        await expect(this.subSubItem1).toBeVisible();
-    }
-
-    //duplicate
-    async verifySliderPageNavigate(){
-        await expect(this.sliderOption).toBeVisible();
-        await this.sliderOption.click();
-        await expect(this.sliderHeading).toBeVisible();
-    }
-
-    //duplicate
-    async verifySliderFunctionality(){
-        await expect(this.sliderElement).toBeVisible();
-        await this.sliderElement.fill('50')
-        await expect(this.sliderElement).toHaveValue('50');
-    }
-
-    //duplicate
-    async verifySliderUsingValue(){
-        await expect(this.sliderElement).toBeVisible();
-        await this.sliderElement.fill('50')
-        await expect(this.sliderValueElement).toHaveValue('50');
-    }
-
-
-    //duplicate
-    async verifyTooltipPageNavigation(){
-        await expect(this.tooltipOption).toBeVisible();
-        await this.tooltipOption.click();
-        await expect(this.tooltipHeading).toBeVisible();
-    }
-
-    //duplicate
-    async verifyHoverMeButtonFunctionality(){
-        await expect(this.hoverMeButton).toBeVisible();
-        await this.hoverMeButton.hover();
-        await expect(this.buttonHoverText).toBeVisible();
-    }
-
-    //duplicate
-    async verifyHoverMeTextfieldFunctionality(){
-        await expect(this.hoverTextfield).toBeVisible();
-        await this.hoverTextfield.hover();
-        await expect(this.textfieldHoverText).toBeVisible();
-    }
-
-    //duplicate
-    async verifyContraryLinkedTextHover(){
-        await expect(this.contraryLinkedText).toBeVisible();
-        await this.contraryLinkedText.hover();
-        await this.page.waitForTimeout(1000);
-        await expect(this.contraryHoverText).toBeVisible();
-    }
-
-
-    //duplicate
-    async verifyNumberLinkedTextHover(){
-        await expect(this.numberHoverLinkedText).toBeVisible();
-        await this.numberHoverLinkedText.hover();
-        await this.page.waitForTimeout(1000);
-        await expect(this.numberHoverText).toBeVisible();
-    }
-
-
-    async verifyElementsPageNavigate(){
+    async verifyElementsPageNavigate() {
         await expect(this.elementsCard).toBeVisible();
         await this.elementsCard.click();
         await expect(this.dynamicPropertiesOption).toBeVisible();
     }
 
 
-    async verifyDynamicPropertiesNavigate(){
+    async verifyDynamicPropertiesNavigate() {
         await expect(this.dynamicPropertiesOption).toBeVisible();
         await this.dynamicPropertiesOption.click();
         await expect(this.dynamicPropertiesHeading).toBeVisible();
     }
 
+
+    // Browser Window page methods
+
+    async verifyBrowserWindowNavigate() {
+        await expect(this.browserWindowsOption).toBeVisible();
+        await this.browserWindowsOption.click();
+        await expect(this.browserWindowsHeading).toBeVisible();
+    }
+
+
+    async verifyNewWindowButtonClick() {
+        await expect(this.newWindowButton).toBeVisible();
+        const popupPromise = this.page.waitForEvent('popup');
+        await this.newWindowButton.click();
+        const popup = await popupPromise;
+        await popup.waitForLoadState();
+    }
 
 }
