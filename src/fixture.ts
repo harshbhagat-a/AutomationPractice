@@ -9,6 +9,8 @@ import { NestedFramesPage } from './pages/alert_frames_windows/nestedFramesPage'
 import { InteractionsPage } from './pages/interactionsPage';
 import { WidgetPage } from './pages/widgetPage';
 import { testdata } from './utils/testdata';
+import { DynamicElementsPage } from './pages/elements/dynamicElementsPage';
+import { UploadDownloadPage } from './pages/elements/uploadDownloadPage';
 
 type MyFixtures = {
     homepage: HomePage;
@@ -21,6 +23,8 @@ type MyFixtures = {
     interactions: InteractionsPage;
     widget: WidgetPage;
     testData: typeof testdata;
+    dynamic: DynamicElementsPage;
+    upload: UploadDownloadPage;
 };
 
 export const test = base.extend<MyFixtures>({
@@ -79,6 +83,18 @@ export const test = base.extend<MyFixtures>({
 
     testData: async ({}, use) => {
     await use(testdata);
+    },
+
+
+    dynamic: async({ page }, use) =>{
+        const dynamic = new DynamicElementsPage(page);
+        await use(dynamic);
+    },
+
+
+    upload: async({ page }, use) =>{
+        const upload = new UploadDownloadPage(page);
+        await use(upload);
     },
 
 

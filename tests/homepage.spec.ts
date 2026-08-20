@@ -33,13 +33,13 @@ test.describe('Home Page', () => {
     await homepage.verifyInteractionsCardClick();
   });
 
-
-
+  
 
   test('Verify Widget section button click on homepage', async ({ homepage }) => {
     await homepage.verifyHomepageConfirmation();
     await homepage.verifyWidgetCardClick();
   });
+
 
 
   test('Verify Elements section button click on homepage', async ({ homepage }) => {
@@ -54,37 +54,6 @@ test.describe('Home Page', () => {
     await homepage.verifyElementsPageNavigate();
     await homepage.verifyDynamicPropertiesNavigate();
   });
-
-
-
-  test('Verify Button 1 enabled after 5 section on Dynamic Properties page', async ({ homepage }) => {
-    await homepage.verifyHomepageConfirmation();
-    await homepage.verifyElementsPageNavigate();
-    await homepage.verifyDynamicPropertiesNavigate();
-    await homepage.verifyButtonEnabled();
-  });
-
-
-
-  test('Verify Button 2 text color after 5 section on Dynamic Properties page', async ({ homepage }) => {
-    await homepage.verifyHomepageConfirmation();
-    await homepage.verifyElementsPageNavigate();
-    await homepage.verifyDynamicPropertiesNavigate();
-    await homepage.verifyButtonTextColorChange();
-  });
-
-
-
-  test('Verify Button 3 visibility after 5 section on Dynamic Properties page', async ({ homepage }) => {
-    await homepage.verifyHomepageConfirmation();
-    await homepage.verifyElementsPageNavigate();
-    await homepage.verifyDynamicPropertiesNavigate();
-    await homepage.verifyButtonVisibility();
-  });
-
-
-
-
 
 
 
