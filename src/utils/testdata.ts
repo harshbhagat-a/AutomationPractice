@@ -28,4 +28,10 @@ export const testdata = {
     month: 'May',
 
     date: '15',
+
+    subject: 'SDET',
+
+    currentAddress: 'CU ,Kharar',
+
+
 };

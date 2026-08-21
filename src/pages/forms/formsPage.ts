@@ -27,6 +27,9 @@ export class FormsPage {
     monthDropdown: Locator;
     monthYearHeading: Locator;
     dateTable: Locator;
+    ncrOption: Locator;
+    delhiOption: Locator;
+    closeButton: Locator;
 
     
     constructor(private page: Page) {
@@ -48,7 +51,7 @@ export class FormsPage {
         this.musicCheckbox = this.page.getByText('Music',{exact: true});
         this.pictureField = this.page.locator('#uploadPicture');
         this.currentAddressField = this.page.locator('#currentAddress');
-        this.selectStateDropdown = this.page.getByText('Select State',{exact: true});
+        this.selectStateDropdown = this.page.locator('#react-select-3-input');
         this.selectCityDropdown = this.page.locator('#city');
         this.submitButton = this.page.getByRole('button',{name: 'Submit'});
         this.calenderWidget = this.page.locator('.react-datepicker');
@@ -56,6 +59,9 @@ export class FormsPage {
         this.monthDropdown = this.page.locator('.react-datepicker__month-select');
         this.monthYearHeading = this.page.locator('.react-datepicker__current-month');
         this.dateTable  = this.page.getByRole('table');
+        this.ncrOption = this.page.getByRole('option', { name: 'NCR' });
+        this.delhiOption = this.page.getByRole('option', { name: 'Delhi' });
+        this.closeButton = this.page.getByRole('button',{name: 'Close'});
 
         
     }
@@ -132,6 +138,49 @@ export class FormsPage {
         const expectedDate = `${testdata.date} ${testdata.month} ${testdata.year}`;
         await expect(this.dateOfBirthField).toHaveValue(expectedDate);
     }
+
+    async verifyCheckboxClick(element: Locator){
+        await expect(element).toBeVisible();
+        await element.click();
+        await expect(element).toBeChecked();
+    }
+
+
+    async verifyFileUpload(){
+        await expect(this.pictureField).toBeVisible();
+        await this.pictureField.setInputFiles('src/uploadingFiles/sampleFile.jpeg');
+        await expect(this.pictureField).toHaveValue(/sampleFile\.jpeg/);
+    }
+
+
+    async verifyNCROptionClick(){
+        await expect(this.selectStateDropdown).toBeVisible();
+        await this.selectStateDropdown.click();
+        await expect(this.ncrOption).toBeVisible();
+        await this.ncrOption.click();
+    }
+
+
+    async verifyDelhiOptionClick(){
+        await expect(this.selectCityDropdown).toBeVisible();
+        await this.selectCityDropdown.click();
+        await expect(this.delhiOption).toBeVisible();
+        await this.delhiOption.click();
+    }
+
+
+    async verifySubmitButtonClick(){
+        await expect(this.submitButton).toBeVisible();
+        await this.submitButton.click();
+        await expect(this.closeButton).toBeVisible();
+    }
+
+
+    async verifyCloseButtonClick(){
+        await expect(this.closeButton).toBeVisible();
+        await this.closeButton.click();
+    }
+
 
 
 }

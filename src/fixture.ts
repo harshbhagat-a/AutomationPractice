@@ -11,6 +11,7 @@ import { WidgetPage } from './pages/widgetPage';
 import { testdata } from './utils/testdata';
 import { DynamicElementsPage } from './pages/elements/dynamicElementsPage';
 import { UploadDownloadPage } from './pages/elements/uploadDownloadPage';
+import { BrowserWindowsPage } from './pages/alert_frames_windows/browserWindowsPage';
 
 type MyFixtures = {
     homepage: HomePage;
@@ -25,6 +26,7 @@ type MyFixtures = {
     testData: typeof testdata;
     dynamic: DynamicElementsPage;
     upload: UploadDownloadPage;
+    browserWindow: BrowserWindowsPage
 };
 
 export const test = base.extend<MyFixtures>({
@@ -95,6 +97,12 @@ export const test = base.extend<MyFixtures>({
     upload: async({ page }, use) =>{
         const upload = new UploadDownloadPage(page);
         await use(upload);
+    },
+
+
+    browserWindow: async({ page }, use) =>{
+        const browserWindow = new BrowserWindowsPage(page);
+        await use(browserWindow);
     },
 
 

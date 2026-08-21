@@ -94,6 +94,62 @@ test.describe('Forms Page', () => {
   });
 
 
+  test('Verify Subject input field fill on Practice Forms page', async ({ forms }) => {
+    await forms.verifyInputFieldFill(forms.subjectField, testdata.subject);
+  });
+
+
+  test('Verify Sports checkbox click under hobbies section on Practice Forms page', async ({ forms }) => {
+    await forms.verifyCheckboxClick(forms.sportsCheckbox);
+  });
+
+
+  test('Verify Reading checkbox click under hobbies section on Practice Forms page', async ({ forms }) => {
+    await forms.verifyCheckboxClick(forms.readingCheckbox);
+  });
+
+
+  test('Verify Music checkbox click under hobbies section on Practice Forms page', async ({ forms }) => {
+    await forms.verifyCheckboxClick(forms.musicCheckbox);
+  });
+
+
+  test('Verify picture upload on Practice Forms page', async ({ forms }) => {
+    await forms.verifyFileUpload();
+  });
+
+
+
+  test('Verify NCR option select under State dropdown on Practice Forms page', async ({ forms }) => {
+    await forms.verifyNCROptionClick();
+  });
+
+
+  test('Verify Delhi option select under City dropdown on Practice Forms page', async ({ forms }) => {
+    await forms.verifyNCROptionClick();
+    await forms.verifyDelhiOptionClick();
+  });
+
+
+
+  test('Verify functionality of Submit button on Practice Forms page', async ({ forms }) => {
+    await forms.verifyInputFieldFill(forms.firstNameField, testdata.firstName);
+    await forms.verifyInputFieldFill(forms.lastNameField, testdata.lastName);
+    await forms.verifyRadioButtonClick(forms.maleRadioButton);
+    await forms.verifyInputFieldFill(forms.mobileInputField, testdata.phoneNo);
+    await forms.verifySubmitButtonClick();
+  });
+
+
+  test('Verify functionality of Close button on Confirmation popup', async ({ forms }) => {
+    await forms.verifyInputFieldFill(forms.firstNameField, testdata.firstName);
+    await forms.verifyInputFieldFill(forms.lastNameField, testdata.lastName);
+    await forms.verifyRadioButtonClick(forms.maleRadioButton);
+    await forms.verifyInputFieldFill(forms.mobileInputField, testdata.phoneNo);
+    await forms.verifySubmitButtonClick();
+    await forms.verifyCloseButtonClick();
+  });
+
 
 
 })

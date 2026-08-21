@@ -49,18 +49,10 @@ test.describe('Home Page', () => {
   });
 
 
-  //Browser windows page tests 
 
-  test('Verify navigating Browser Window page on Elements page', async ({ homepage }) => {
+  test('Verify navigating Browser Window page on Elements page', async ({ homepage, browserWindow }) => {
     await homepage.verifyAlertFrameWindowsCardClick();
-    await homepage.verifyBrowserWindowNavigate();
-  });
-
-
-  test('Verify functionality of New Window button on Browser Window page', async ({ homepage }) => {
-    await homepage.verifyAlertFrameWindowsCardClick();
-    await homepage.verifyBrowserWindowNavigate();
-    await homepage.verifyNewWindowButtonClick();
+    await browserWindow.verifyBrowserWindowNavigate();
   });
 
 

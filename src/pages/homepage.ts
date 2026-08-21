@@ -72,9 +72,6 @@ export class HomePage {
     dynamicButton3: Locator;
     webTablesOption: Locator;
     webTablesHeading: Locator;
-    browserWindowsOption: Locator;
-    browserWindowsHeading: Locator;
-    newWindowButton: Locator;
 
 
     constructor(private page: Page) {
@@ -149,10 +146,6 @@ export class HomePage {
         this.webTablesOption = this.page.getByRole('link', { name: 'Web Tables' });
         this.webTablesHeading = this.page.getByRole('heading', { name: 'Web Tables' });
 
-        //Browser windows page
-        this.browserWindowsOption = this.page.getByRole('link', { name: 'Browser Windows' });
-        this.browserWindowsHeading = this.page.getByRole('heading', { name: 'Browser Windows' });
-        this.newWindowButton = this.page.getByRole('button', { name: 'New Window', exact: true});
 
     }
 
@@ -243,21 +236,7 @@ export class HomePage {
     }
 
 
-    // Browser Window page methods
-
-    async verifyBrowserWindowNavigate() {
-        await expect(this.browserWindowsOption).toBeVisible();
-        await this.browserWindowsOption.click();
-        await expect(this.browserWindowsHeading).toBeVisible();
-    }
 
 
-    async verifyNewWindowButtonClick() {
-        await expect(this.newWindowButton).toBeVisible();
-        const popupPromise = this.page.waitForEvent('popup');
-        await this.newWindowButton.click();
-        const popup = await popupPromise;
-        await popup.waitForLoadState();
-    }
 
 }
