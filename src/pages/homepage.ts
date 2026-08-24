@@ -72,6 +72,8 @@ export class HomePage {
     dynamicButton3: Locator;
     webTablesOption: Locator;
     webTablesHeading: Locator;
+    bookStoreApplicationCard: Locator;
+    loginOption: Locator;
 
 
     constructor(private page: Page) {
@@ -145,6 +147,8 @@ export class HomePage {
         this.dynamicButton3 = this.page.locator('#visibleAfter');
         this.webTablesOption = this.page.getByRole('link', { name: 'Web Tables' });
         this.webTablesHeading = this.page.getByRole('heading', { name: 'Web Tables' });
+        this.bookStoreApplicationCard = this.page.getByRole('heading',{name:'Book Store Application'});
+        this.loginOption = this.page.getByRole('link',{name:'Login'});
 
 
     }
@@ -233,6 +237,15 @@ export class HomePage {
         await expect(this.dynamicPropertiesOption).toBeVisible();
         await this.dynamicPropertiesOption.click();
         await expect(this.dynamicPropertiesHeading).toBeVisible();
+    }
+
+
+
+    async bookStoreCardClick(){
+        await expect(this.bookStoreApplicationCard).toBeVisible();
+        await this.bookStoreApplicationCard.click();
+        await expect(this.loginOption).toBeVisible();
+
     }
 
 

@@ -6,12 +6,14 @@ import { FormsPage } from './pages/forms/formsPage';
 import { AlertsPage } from './pages/alert_frames_windows/alertsPage';
 import { FramesPage } from './pages/alert_frames_windows/framesPage';
 import { NestedFramesPage } from './pages/alert_frames_windows/nestedFramesPage';
-import { InteractionsPage } from './pages/interactionsPage';
+import { InteractionsPage } from './pages/interactions/interactionsPage';
 import { WidgetPage } from './pages/widgetPage';
 import { testdata } from './utils/testdata';
 import { DynamicElementsPage } from './pages/elements/dynamicElementsPage';
 import { UploadDownloadPage } from './pages/elements/uploadDownloadPage';
 import { BrowserWindowsPage } from './pages/alert_frames_windows/browserWindowsPage';
+import { DraggablePage } from './pages/interactions/draggablePage';
+import { BookStorePage } from './pages/bookStorePage';
 
 type MyFixtures = {
     homepage: HomePage;
@@ -26,7 +28,9 @@ type MyFixtures = {
     testData: typeof testdata;
     dynamic: DynamicElementsPage;
     upload: UploadDownloadPage;
-    browserWindow: BrowserWindowsPage
+    browserWindow: BrowserWindowsPage;
+    drag: DraggablePage;
+    bookStore: BookStorePage;
 };
 
 export const test = base.extend<MyFixtures>({
@@ -103,6 +107,18 @@ export const test = base.extend<MyFixtures>({
     browserWindow: async({ page }, use) =>{
         const browserWindow = new BrowserWindowsPage(page);
         await use(browserWindow);
+    },
+
+
+    drag: async({ page }, use) =>{
+        const drag = new DraggablePage(page);
+        await use(drag);
+    },
+
+
+    bookStore: async({ page }, use) =>{
+        const bookStore = new BookStorePage(page);
+        await use(bookStore);
     },
 
 

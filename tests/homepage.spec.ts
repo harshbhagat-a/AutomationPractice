@@ -57,4 +57,10 @@ test.describe('Home Page', () => {
 
 
 
+  test('Verify navigating Book Store Application page', async ({ homepage }) => {
+    await homepage.bookStoreCardClick();
+  });
+
+
+
 })

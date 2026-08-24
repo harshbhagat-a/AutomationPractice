@@ -33,5 +33,10 @@ export const testdata = {
 
     currentAddress: 'CU ,Kharar',
 
+    userName: 'test1010',
+
+
+    password: 'Test@123',
+
 
 };

@@ -1,4 +1,4 @@
-import { test, expect } from '../src/fixture';
+import { test, expect } from '../../src/fixture';
 
 test.describe('Interactions Page', () => {
 
