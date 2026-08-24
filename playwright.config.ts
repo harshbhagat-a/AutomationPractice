@@ -14,9 +14,9 @@ export default defineConfig({
   workers: process.env.CI ? 1 : 1,
   reporter: [['html'],['list'],] ,
   use: {
-    baseURL: process.env.BASE_URL,
+    baseURL: process.env.BASE_URL || 'https://demoqa.com',
     headless: true,
-    trace: 'on-first-retry',
+    trace: 'retain-on-failure',
   },
   /* Configure projects for major browsers */
   projects: [
