@@ -14,6 +14,8 @@ import { UploadDownloadPage } from './pages/elements/uploadDownloadPage';
 import { BrowserWindowsPage } from './pages/alert_frames_windows/browserWindowsPage';
 import { DraggablePage } from './pages/interactions/draggablePage';
 import { BookStorePage } from './pages/bookStorePage';
+import { GenerateToken } from './pages/api_pages/generateToken';
+import { request } from 'node:http';
 
 type MyFixtures = {
     homepage: HomePage;
@@ -31,6 +33,7 @@ type MyFixtures = {
     browserWindow: BrowserWindowsPage;
     drag: DraggablePage;
     bookStore: BookStorePage;
+    APItoken: GenerateToken;
 };
 
 export const test = base.extend<MyFixtures>({
@@ -119,6 +122,12 @@ export const test = base.extend<MyFixtures>({
     bookStore: async({ page }, use) =>{
         const bookStore = new BookStorePage(page);
         await use(bookStore);
+    },
+
+
+    APItoken: async({ request }, use) =>{
+        const APItoken = new GenerateToken(request);
+        await use(APItoken);
     },
 
 

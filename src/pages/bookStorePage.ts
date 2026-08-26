@@ -104,7 +104,6 @@ export class BookStorePage {
 
 
     async verifyLoginFlow(){
-        await this.verifyLoginPageNavigate();
         await this.verifyUserNameFill();
         await this.verifyPasswordFill();
         await this.verifyLoginButtonClick();
@@ -193,9 +192,34 @@ export class BookStorePage {
     }
 
 
+    async verifyCrossIconClick(){
+        await expect(this.crossButton).toBeVisible();
+        await this.crossButton.click();
+        await expect(this.deleteBookPopup).not.toBeVisible();
+    }
+
+
+    async verifyCancelButtonClick(){
+        await expect(this.cancelButton).toBeVisible();
+        await this.cancelButton.click();
+        await expect(this.deleteBookPopup).not.toBeVisible();
+    }
+
+
     async verifyOkButtonClick(){
         await expect(this.okButton).toBeVisible();
+        this.page.on('dialog', async dialog => {
+            expect(dialog.message()).toContain('Book deleted.');
+            await dialog.accept();
+        });
         await this.okButton.click();
+    }
+
+
+    async verifyLogoutButtonClick(){
+        await expect(this.logoutButton).toBeVisible();
+        await this.logoutButton.click();
+        await expect(this.loginHeading).toBeVisible();
     }
 
 

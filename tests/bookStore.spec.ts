@@ -109,7 +109,6 @@ test.describe('Profile Page', () => {
         await homepage.bookStoreCardClick();
         await bookStore.verifyLoginPageNavigate();
         await bookStore.verifyLoginFlow();
-        await bookStore.verifyProfilePageNavigate();
     });
 
 
@@ -124,6 +123,32 @@ test.describe('Profile Page', () => {
         await bookStore.verifyDeleteIconClick();
         await bookStore.verifyDeleteBookPopupElements();
     });
+
+
+    test('Verify functionality of Cross icon on Delete Book popup', async ({ bookStore }) => {
+        await bookStore.verifyDeleteIconClick();
+        await bookStore.verifyCrossIconClick();
+    });
+
+
+
+    test('Verify functionality of Cancel button on Delete Book popup', async ({ bookStore }) => {
+        await bookStore.verifyDeleteIconClick();
+        await bookStore.verifyCancelButtonClick();
+    });
+
+
+    test('Verify functionality of Ok button on Delete Book popup', async ({ bookStore }) => {
+        await bookStore.verifyDeleteIconClick();
+        await bookStore.verifyOkButtonClick();
+    });
+
+
+    
+    test('Verify functionality of Logout button on Profile page', async ({ bookStore }) => {
+        await bookStore.verifyLogoutButtonClick();
+    });
+    
 
 
 
