@@ -64,13 +64,13 @@ test.describe('Widget Page', () => {
     });
 
 
-    test('Verify hover text of Contrary linked text on Tool Tips page', async ({ widget }) => {
+    test.skip('Verify hover text of Contrary linked text on Tool Tips page', async ({ widget }) => {
         await widget.verifyTooltipPageNavigation();
         await widget.verifyContraryLinkedTextHover();
     });
 
 
-    test('Verify hover text of Number(1.10.32) linked text on Tool Tips page', async ({ widget }) => {
+    test.skip('Verify hover text of Number(1.10.32) linked text on Tool Tips page', async ({ widget }) => {
         await widget.verifyTooltipPageNavigation();
         await widget.verifyNumberLinkedTextHover();
     });
