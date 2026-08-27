@@ -7,5 +7,4 @@ test.describe('Authorization API test', () => {
         await APItoken.authorizeUser();
     });
 
-
 })

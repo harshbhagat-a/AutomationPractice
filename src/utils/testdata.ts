@@ -35,7 +35,6 @@ export const testdata = {
 
     userName: 'test1010',
 
-
     password: 'Test@123',
 
 

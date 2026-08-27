@@ -16,6 +16,7 @@ import { DraggablePage } from './pages/interactions/draggablePage';
 import { BookStorePage } from './pages/bookStorePage';
 import { GenerateToken } from './pages/api_pages/generateToken';
 import { request } from 'node:http';
+import { API } from './pages/api_pages/api';
 
 type MyFixtures = {
     homepage: HomePage;
@@ -34,6 +35,7 @@ type MyFixtures = {
     drag: DraggablePage;
     bookStore: BookStorePage;
     APItoken: GenerateToken;
+    api: API;
 };
 
 export const test = base.extend<MyFixtures>({
@@ -128,6 +130,12 @@ export const test = base.extend<MyFixtures>({
     APItoken: async({ request }, use) =>{
         const APItoken = new GenerateToken(request);
         await use(APItoken);
+    },
+
+
+    api: async({ request }, use) =>{
+        const api = new API(request);
+        await use(api);
     },
 
 
