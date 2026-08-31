@@ -2,17 +2,16 @@ import { test, expect } from '../../src/fixture';
 import { GenerateToken } from '../../src/pages/api_pages/generateToken';
 import books from '../../src/utils/data.json';
 
-let userId: string;
 
 test.describe('API tests', () => {
 
     test('Verify Creating a user', async ({ api }) => {
-        userId = await api.verifyUserCreation();
+        await api.verifyUserCreation();
     });
 
     
     test('Verify Created User', async ({ api }) => {
-        await api.verifyCreatedUser(userId);
+        await api.verifyCreatedUser();
     });
 
 
@@ -21,9 +20,9 @@ test.describe('API tests', () => {
     });
 
 
-    // test.only('Add book', async ({ api }) => {
-    //     const isbn = books.isbns[0];
-    //     await api.verifyBookAddition(userId, isbn)
+    // test('Add book', async ({ api }) => {
+    //     const isbn = books.isbns[4];
+    //     await api.verifyBookAddition(isbn)
     // });
 
 

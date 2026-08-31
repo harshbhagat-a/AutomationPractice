@@ -17,6 +17,10 @@ import { BookStorePage } from './pages/bookStorePage';
 import { GenerateToken } from './pages/api_pages/generateToken';
 import { request } from 'node:http';
 import { API } from './pages/api_pages/api';
+import { ButtonsPage } from './pages/elements/buttonsPage';
+import { ProgressBarPage } from './pages/widgets/progressbarPage';
+import { MenuPage } from './pages/widgets/menuPage';
+import { SliderPage } from './pages/widgets/sliderPage';
 
 type MyFixtures = {
     homepage: HomePage;
@@ -36,6 +40,11 @@ type MyFixtures = {
     bookStore: BookStorePage;
     APItoken: GenerateToken;
     api: API;
+    button: ButtonsPage;
+    progress: ProgressBarPage;
+    menu: MenuPage;
+    slider: SliderPage;
+
 };
 
 export const test = base.extend<MyFixtures>({
@@ -136,6 +145,30 @@ export const test = base.extend<MyFixtures>({
     api: async({ request }, use) =>{
         const api = new API(request);
         await use(api);
+    },
+
+
+    button: async({ page }, use) =>{
+        const button = new ButtonsPage(page);
+        await use(button);
+    },
+
+
+    progress: async({ page }, use) =>{
+        const progress = new ProgressBarPage(page);
+        await use(progress);
+    },
+
+
+    menu: async({ page }, use) =>{
+        const menu = new MenuPage(page);
+        await use(menu);
+    },
+
+
+    slider: async({ page }, use) =>{
+        const slider = new SliderPage(page);
+        await use(slider);
     },
 
 

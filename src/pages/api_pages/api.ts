@@ -3,23 +3,33 @@ import { testdata } from '../../utils/testdata';
 import { ApiEndpoints } from '../../utils/APIendpoints';
 import { generateUniqueUsername } from '../../utils/genericMethods';
 import fs from 'fs';
+import { GenerateToken } from './generateToken';
+import authdata from '../authFiles/authdata.json';
 
 export class API {
+    name: String
 
+    private generateToken: GenerateToken;
 
-
-    constructor(private request: APIRequestContext) { }
+    constructor(private request: APIRequestContext) {
+        this.generateToken = new GenerateToken(request);
+        this.name = generateUniqueUsername();
+    }
 
     async verifyUserCreation() {
         const response = await this.request.post(ApiEndpoints.user, {
             data: {
-                userName: generateUniqueUsername(),
+                userName: this.name,
                 password: testdata.password
             }
         });
         const responseBody = await response.json();
         await expect(response.status()).toBe(201);
-        console.log(responseBody);
+        const userId = responseBody.userID;
+        fs.writeFileSync(
+            'src/pages/authFIles/authdata.json',
+            JSON.stringify({ userId }, null, 4)
+        );
         return responseBody.userId;
     }
 
@@ -37,14 +47,15 @@ export class API {
 
 
 
-    async verifyCreatedUser(userid: String) {
+    async verifyCreatedUser() {
+        const userid = authdata.userId;
         const response = await this.request.get(ApiEndpoints.userDetails, {
             data: {
                 UserId: userid,
             }
         });
         await expect(response.status()).toBe(200);
-        console.log(response);
+        //console.log(response);
     }
 
 
@@ -63,10 +74,18 @@ export class API {
     }
 
 
-    async verifyBookAddition(userid: String, isbnNo: String) {
-        const response = await this.request.post(ApiEndpoints.userDetails, {
+    async verifyBookAddition( isbnNo: String) {
+        const token = await this.generateToken.authorizeUser(this.name);
+        const userid = authdata.userId;
+        console.log('UserId: ',userid);
+        console.log('ISBN number: ',isbnNo)
+        console.log('TOKEN: ', token);
+        const response = await this.request.post(ApiEndpoints.addBook, {
+            headers: {
+                Authorization: `Bearer ${token}`
+            },
             data: {
-                UserId: userid,
+                userId: userid,
                 collectionOfIsbns: [
                     {
                         isbn: isbnNo
@@ -74,8 +93,10 @@ export class API {
                 ]
             }
         });
-        //await expect(response.status()).toBe(201);
-        console.log(response);
+        console.log('Status:', response.status());
+        console.log('Status Text:', response.statusText());
+        console.log('Response:', await response.text());
+        await expect(response.status()).toBe(201);
     }
 
 }
