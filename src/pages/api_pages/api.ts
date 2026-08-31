@@ -4,7 +4,7 @@ import { ApiEndpoints } from '../../utils/APIendpoints';
 import { generateUniqueUsername } from '../../utils/genericMethods';
 import fs from 'fs';
 import { GenerateToken } from './generateToken';
-import authdata from '../authFiles/authdata.json';
+import authdata from '../authFIles/authdata.json';
 
 export class API {
     name: String
