@@ -23,6 +23,4 @@ test.describe('Slider Page', () => {
 
 
 
-    
-
 })

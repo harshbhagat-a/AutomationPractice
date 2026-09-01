@@ -107,6 +107,7 @@ export class BookStorePage {
         await this.verifyUserNameFill();
         await this.verifyPasswordFill();
         await this.verifyLoginButtonClick();
+        await this.page.waitForTimeout(2000);
         await expect(this.logoutButton).toBeVisible();
     }
 
