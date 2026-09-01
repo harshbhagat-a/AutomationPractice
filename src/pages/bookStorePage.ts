@@ -81,7 +81,7 @@ export class BookStorePage {
     async verifyLoginButtonClick(){
         await expect(this.loginButton).toBeVisible();
         await this.loginButton.click();
-        await this.page.waitForLoadState('networkidle');
+        await this.page.waitForTimeout(2000);
     }
 
 
