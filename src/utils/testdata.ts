@@ -35,8 +35,17 @@ export const testdata = {
 
     userName: 'test1010',
 
-
     password: 'Test@123',
+
+    home: 'Home',
+    homebPDgy: 'Home bPDgy',
+    created: 'Created',
+    noContent: 'No Content',
+    moved: 'Moved',
+    badRequest: 'Bad Request',
+    unauthorized: 'Unauthorized',
+    forbidden: 'Forbidden',
+    notFound: 'Not Found',
 
 
 };

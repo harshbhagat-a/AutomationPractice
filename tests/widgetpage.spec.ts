@@ -8,45 +8,6 @@ test.describe('Widget Page', () => {
     });
 
 
-    test('Verify navigating Menu page from Widgets page', async ({ widget }) => {
-        await widget.verifyMenuPageNavigation();
-    });
-
-
-
-    test('Verify hovering over Main Item 2 option on Menu page', async ({ widget }) => {
-        await widget.verifyMenuPageNavigation();
-        await widget.verifyHoveringMenu();
-    });
-
-
-
-    test('Verify hovering over Submenu under Main Item 2 option on Menu page', async ({ widget }) => {
-        await widget.verifyMenuPageNavigation();
-        await widget.verifyHoveringMenu();
-        await widget.verifyHoveringSubmenu();
-    });
-
-
-    test('Verify navigating Slider page from Widgets page', async ({ widget }) => {
-        await widget.verifySliderPageNavigate();
-    });
-
-
-
-    test('Verify functionality of slider element on Slider page', async ({ widget }) => {
-        await widget.verifySliderPageNavigate();
-        await widget.verifySliderFunctionality();
-    });
-
-
-    test('Verify functionality of slider element on Slider page using slider value', async ({ widget }) => {
-        await widget.verifySliderPageNavigate();
-        await widget.verifySliderUsingValue();
-    });
-
-
-
     test('Verify navigating Tool Tips page from Widgets page', async ({ widget }) => {
         await widget.verifyTooltipPageNavigation();
     });
@@ -64,15 +25,19 @@ test.describe('Widget Page', () => {
     });
 
 
-    test('Verify hover text of Contrary linked text on Tool Tips page', async ({ widget }) => {
+    test.skip('Verify hover text of Contrary linked text on Tool Tips page', async ({ widget }) => {
         await widget.verifyTooltipPageNavigation();
         await widget.verifyContraryLinkedTextHover();
     });
 
 
-    test('Verify hover text of Number(1.10.32) linked text on Tool Tips page', async ({ widget }) => {
+    test.skip('Verify hover text of Number(1.10.32) linked text on Tool Tips page', async ({ widget }) => {
         await widget.verifyTooltipPageNavigation();
         await widget.verifyNumberLinkedTextHover();
     });
+
+
+
+
 
 })

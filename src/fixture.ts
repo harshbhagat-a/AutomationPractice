@@ -14,6 +14,15 @@ import { UploadDownloadPage } from './pages/elements/uploadDownloadPage';
 import { BrowserWindowsPage } from './pages/alert_frames_windows/browserWindowsPage';
 import { DraggablePage } from './pages/interactions/draggablePage';
 import { BookStorePage } from './pages/bookStorePage';
+import { GenerateToken } from './pages/api_pages/generateToken';
+import { request } from 'node:http';
+import { API } from './pages/api_pages/api';
+import { ButtonsPage } from './pages/elements/buttonsPage';
+import { ProgressBarPage } from './pages/widgets/progressbarPage';
+import { MenuPage } from './pages/widgets/menuPage';
+import { SliderPage } from './pages/widgets/sliderPage';
+import { SelectMenuPage } from './pages/widgets/selectMenuPage';
+import { LinksPage } from './pages/elements/linksPage';
 
 type MyFixtures = {
     homepage: HomePage;
@@ -31,6 +40,15 @@ type MyFixtures = {
     browserWindow: BrowserWindowsPage;
     drag: DraggablePage;
     bookStore: BookStorePage;
+    APItoken: GenerateToken;
+    api: API;
+    button: ButtonsPage;
+    progress: ProgressBarPage;
+    menu: MenuPage;
+    slider: SliderPage;
+    select: SelectMenuPage;
+    link: LinksPage;
+
 };
 
 export const test = base.extend<MyFixtures>({
@@ -119,6 +137,55 @@ export const test = base.extend<MyFixtures>({
     bookStore: async({ page }, use) =>{
         const bookStore = new BookStorePage(page);
         await use(bookStore);
+    },
+
+
+    APItoken: async({ request }, use) =>{
+        const APItoken = new GenerateToken(request);
+        await use(APItoken);
+    },
+
+
+    api: async({ request }, use) =>{
+        const api = new API(request);
+        await use(api);
+    },
+
+
+    button: async({ page }, use) =>{
+        const button = new ButtonsPage(page);
+        await use(button);
+    },
+
+
+    progress: async({ page }, use) =>{
+        const progress = new ProgressBarPage(page);
+        await use(progress);
+    },
+
+
+    menu: async({ page }, use) =>{
+        const menu = new MenuPage(page);
+        await use(menu);
+    },
+
+
+    slider: async({ page }, use) =>{
+        const slider = new SliderPage(page);
+        await use(slider);
+    },
+
+
+    select: async({ page }, use) =>{
+        const select = new SelectMenuPage(page);
+        await use(select);
+    },
+
+
+
+    link: async({ page }, use) =>{
+        const link = new LinksPage(page);
+        await use(link);
     },
 
 
