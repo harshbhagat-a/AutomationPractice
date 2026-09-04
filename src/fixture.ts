@@ -22,6 +22,7 @@ import { ProgressBarPage } from './pages/widgets/progressbarPage';
 import { MenuPage } from './pages/widgets/menuPage';
 import { SliderPage } from './pages/widgets/sliderPage';
 import { SelectMenuPage } from './pages/widgets/selectMenuPage';
+import { LinksPage } from './pages/elements/linksPage';
 
 type MyFixtures = {
     homepage: HomePage;
@@ -46,6 +47,7 @@ type MyFixtures = {
     menu: MenuPage;
     slider: SliderPage;
     select: SelectMenuPage;
+    link: LinksPage;
 
 };
 
@@ -177,6 +179,13 @@ export const test = base.extend<MyFixtures>({
     select: async({ page }, use) =>{
         const select = new SelectMenuPage(page);
         await use(select);
+    },
+
+
+
+    link: async({ page }, use) =>{
+        const link = new LinksPage(page);
+        await use(link);
     },
 
 
