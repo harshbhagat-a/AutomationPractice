@@ -22,6 +22,52 @@ test.describe('Links Page', () => {
 
 
     
+    test('Verify HomebPDgy linked text click on Links page', async ({ link }) => {
+        await link.verifyHomebPDgyLinkedTextCLick();
+    });
+
+
+
+    test('Verify Created linked text click on Links page', async ({ link }) => {
+        await link.verifyCreatedLinkedTextClick(link.createdLinkedText);
+    });
+
+
+
+    test('Verify No Content linked text click on Links page', async ({ link }) => {
+        await link.verifyCreatedLinkedTextClick(link.noContentLinkedText);
+    });
+
+
+
+    test('Verify Moved linked text click on Links page', async ({ link }) => {
+        await link.verifyCreatedLinkedTextClick(link.movedLinkedText);
+    });
+
+
+
+    test('Verify Bad Request linked text click on Links page', async ({ link }) => {
+        await link.verifyCreatedLinkedTextClick(link.badRequestLinkedText);
+    });
+
+
+
+    test('Verify Unauthorized linked text click on Links page', async ({ link }) => {
+        await link.verifyCreatedLinkedTextClick(link.unauthorizedLinkedText);
+    });
+
+
+
+    test('Verify Forbidden linked text click on Links page', async ({ link }) => {
+        await link.verifyCreatedLinkedTextClick(link.forbiddenLinkedText);
+    });
+
+
+
+    test('Verify Not Found linked text click on Links page', async ({ link }) => {
+        await link.verifyCreatedLinkedTextClick(link.notFoundLinkedText);
+    });
+
 
 
 })

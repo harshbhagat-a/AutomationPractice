@@ -15,6 +15,7 @@ export class LinksPage {
     unauthorizedLinkedText: Locator;
     forbiddenLinkedText: Locator;
     notFoundLinkedText: Locator;
+    responseLocator: Locator;
     
    
 
@@ -34,6 +35,7 @@ export class LinksPage {
         this.unauthorizedLinkedText = this.page.getByRole('link',{name: testdata.unauthorized});
         this.forbiddenLinkedText = this.page.getByRole('link',{name: testdata.forbidden});
         this.notFoundLinkedText = this.page.getByRole('link',{name: testdata.notFound});
+        this.responseLocator = this.page.locator('#linkResponse');
         
     }
 
@@ -66,6 +68,22 @@ export class LinksPage {
     }
 
     
+
+    async verifyHomebPDgyLinkedTextCLick(){
+        await expect(this.homebPDgyLinkedText).toBeVisible();
+        const [newPage] = await Promise.all([
+            this.page.context().waitForEvent('page'), this.homebPDgyLinkedText.click()
+        ]);
+        await expect(newPage).toHaveURL(process.env.BASE_URL!);
+    }
+
+
+
+    async verifyCreatedLinkedTextClick(element: Locator){
+        await expect(element).toBeVisible();
+        await element.click();
+        await expect(this.responseLocator).toBeVisible();
+    }
 
     
 }
