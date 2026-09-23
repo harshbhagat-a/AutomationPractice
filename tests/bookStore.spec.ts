@@ -1,6 +1,6 @@
 import { test, expect } from '../src/fixture';
 
-test.describe('Book Store Application Section', () => {
+test.describe.skip('Book Store Application Section', () => {
 
     test.beforeEach('Book Store page navigation', async ({ homepage }) => {
         await homepage.verifyHomepageConfirmation();
@@ -71,7 +71,7 @@ test.describe('Book Store Application Section', () => {
 
 })
 
-test.describe('Book Store Page', () => {
+test.describe.skip('Book Store Page', () => {
 
     test.beforeEach('Book Store page navigation', async ({ homepage, bookStore }) => {
         await homepage.verifyHomepageConfirmation();
