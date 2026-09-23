@@ -23,6 +23,7 @@ import { MenuPage } from './pages/widgets/menuPage';
 import { SliderPage } from './pages/widgets/sliderPage';
 import { SelectMenuPage } from './pages/widgets/selectMenuPage';
 import { LinksPage } from './pages/elements/linksPage';
+import { TextBoxPage } from './pages/elements/textBoxPage';
 
 type MyFixtures = {
     homepage: HomePage;
@@ -48,6 +49,7 @@ type MyFixtures = {
     slider: SliderPage;
     select: SelectMenuPage;
     link: LinksPage;
+    textbox: TextBoxPage;
 
 };
 
@@ -186,6 +188,13 @@ export const test = base.extend<MyFixtures>({
     link: async({ page }, use) =>{
         const link = new LinksPage(page);
         await use(link);
+    },
+
+
+
+    textbox: async({ page }, use) =>{
+        const textbox = new TextBoxPage(page);
+        await use(textbox);
     },
 
 
