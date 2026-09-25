@@ -24,6 +24,7 @@ import { SliderPage } from './pages/widgets/sliderPage';
 import { SelectMenuPage } from './pages/widgets/selectMenuPage';
 import { LinksPage } from './pages/elements/linksPage';
 import { TextBoxPage } from './pages/elements/textBoxPage';
+import { CheckBoxPage } from './pages/elements/checkboxPage';
 
 type MyFixtures = {
     homepage: HomePage;
@@ -50,6 +51,7 @@ type MyFixtures = {
     select: SelectMenuPage;
     link: LinksPage;
     textbox: TextBoxPage;
+    checkbox: CheckBoxPage;
 
 };
 
@@ -195,6 +197,13 @@ export const test = base.extend<MyFixtures>({
     textbox: async({ page }, use) =>{
         const textbox = new TextBoxPage(page);
         await use(textbox);
+    },
+
+
+
+    checkbox: async({ page }, use) =>{
+        const checkbox = new CheckBoxPage(page);
+        await use(checkbox);
     },
 
 

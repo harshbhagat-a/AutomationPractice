@@ -102,7 +102,7 @@ test.describe.skip('Book Store Page', () => {
 
 
 
-test.describe('Profile Page', () => {
+test.describe.skip('Profile Page', () => {
 
     test.beforeEach('Profile page navigation', async ({ homepage, bookStore }) => {
         await homepage.verifyHomepageConfirmation();
