@@ -1,16 +1,6 @@
 import { Locator, Page, expect } from '@playwright/test';
 
 export class WidgetPage {
-    menuOption: Locator;
-    menuHeading: Locator;
-    mainItem2: Locator;
-    subItem: Locator;
-    subSubList: Locator;
-    subSubItem1: Locator;
-    sliderOption: Locator;
-    sliderHeading: Locator;
-    sliderElement: Locator;
-    sliderValueElement: Locator;
     tooltipOption: Locator;
     tooltipHeading: Locator;
     hoverMeButton: Locator;
@@ -21,21 +11,13 @@ export class WidgetPage {
     contraryHoverText: Locator;
     numberHoverLinkedText: Locator;
     numberHoverText: Locator;
+    
    
     
 
     constructor(private page: Page) {
         //Locators
-        this.menuOption = this.page.getByRole('link', { name: 'Menu', exact: true });
-        this.menuHeading = this.page.getByRole('heading',{name: 'Menu'});
-        this.mainItem2 = page.getByText('Main Item 2', { exact: true });
-        this.subItem = page.getByText('Sub Item', { exact: true }).first();
-        this.subSubList = page.getByText('SUB SUB LIST »', { exact: true });
-        this.subSubItem1 = page.getByText('Sub Sub Item 1', { exact: true });
-        this.sliderOption = this.page.getByRole('link',{name: 'Slider'});
-        this.sliderHeading = this.page.getByRole('heading',{name: 'Slider'});
-        this.sliderElement = this.page.locator('.range-slider');
-        this.sliderValueElement = this.page.locator('#sliderValue');
+        
         this.tooltipOption = this.page.getByRole('link',{name: 'Tool Tips'});
         this.tooltipHeading = this.page.getByRole('heading',{name: 'Tool Tips'});
         this.hoverMeButton = this.page.getByRole('button',{name: 'Hover me to see'});
@@ -49,46 +31,6 @@ export class WidgetPage {
         
     }
 
-
-    async verifyMenuPageNavigation(){
-        await expect(this.menuOption).toBeVisible();
-        await this.menuOption.click();
-        await expect(this.menuHeading).toBeVisible();
-    }
-
-
-    async verifyHoveringMenu(){
-        await this.mainItem2.hover();
-        await expect(this.subItem).toBeVisible();
-    }
-
-
-    async verifyHoveringSubmenu(){
-        await this.subSubList.hover();
-        await this.page.waitForTimeout(1000);
-        await expect(this.subSubItem1).toBeVisible();
-    }
-
-
-    async verifySliderPageNavigate(){
-        await expect(this.sliderOption).toBeVisible();
-        await this.sliderOption.click();
-        await expect(this.sliderHeading).toBeVisible();
-    }
-
-
-    async verifySliderFunctionality(){
-        await expect(this.sliderElement).toBeVisible();
-        await this.sliderElement.fill('50')
-        await expect(this.sliderElement).toHaveValue('50');
-    }
-
-
-    async verifySliderUsingValue(){
-        await expect(this.sliderElement).toBeVisible();
-        await this.sliderElement.fill('50')
-        await expect(this.sliderValueElement).toHaveValue('50');
-    }
 
 
     async verifyTooltipPageNavigation(){
@@ -126,6 +68,9 @@ export class WidgetPage {
         await this.page.waitForTimeout(1000);
         await expect(this.numberHoverText).toBeVisible();
     }
+
+
+    
 
     
 }
